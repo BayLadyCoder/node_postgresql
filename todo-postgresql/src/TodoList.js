@@ -8,7 +8,7 @@ export class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: "",
+      data: [],
       todos: []
     };
     this.create = this.create.bind(this);
@@ -39,19 +39,23 @@ export class TodoList extends Component {
   }
 
   render() {
-    let todos = this.state.todos.map(todo => {
-      return (
-        <Todo
-          task={todo.task}
-          key={todo.id}
-          remove={() => this.remove(todo.id)}
-        />
-      );
-    });
+    let todos;
+    if (this.state.data !== "") {
+      todos = this.state.data.map(todo => {
+        return (
+          <Todo
+            task={todo.task}
+            // key={todo.id}
+            // remove={() => this.remove(todo.id)}
+          />
+        );
+      });
+    }
+
     return (
       <div className="TodoList">
         <NewTodoForm create={this.create} />
-        {todos}
+        {this.state.data !== "" ? todos : null}
       </div>
     );
   }
