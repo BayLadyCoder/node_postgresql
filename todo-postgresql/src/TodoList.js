@@ -2,15 +2,28 @@ import React, { Component } from "react";
 import "./TodoList.css";
 import Todo from "./Todo";
 import NewTodoForm from "./NewTodoForm";
+import axios from "axios";
 
 export class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      data: "",
       todos: []
     };
     this.create = this.create.bind(this);
     this.remove = this.remove.bind(this);
+  }
+
+  async componentDidMount() {
+    const url = "/api/todos";
+    const res = await axios.get(url);
+    console.log(res);
+    console.log(res.data);
+    const data = res.data;
+    console.log(data);
+    this.setState({ data: data });
+    console.log(this.state.data);
   }
 
   create(newTodo) {
