@@ -45,7 +45,7 @@ export class TodoList extends Component {
         return (
           <Todo
             task={todo.task}
-            // key={todo.id}
+            key={todo.id}
             // remove={() => this.remove(todo.id)}
           />
         );
